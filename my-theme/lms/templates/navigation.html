@@ -151,38 +151,37 @@ site_status_msg = get_site_status_msg(course_id)
           % endif
         </%block>
       </ol>
-
+																																
+																																
       <ol class="right nav-courseware list-inline">
-        <%block name="navigation_sign_in">
-		% if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
-			% if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
-			  <li class="item nav-global-04">
-				<a class="btn-neutral btn-register" style="padding:10px 20px;" href="${reverse('course-specific-register', args=[course.id.to_deprecated_string()])}">${_("")}</a>
+		    <li class="item nav-global-04">
+			    <a class="btn-neutral btn-register" style="padding:10px 20px;" href="http://mpp.squarenet.co.kr", target="_blank">공지사항</a> 
 			  </li>
- 	        	% else:
-			  <li class="item nav-global-04">
-				<a class="btn-neutral btn-register" style="padding:10px 20px;" href="http://mpp.squarenet.co.kr", target="_blank">공지사항</a> 
-			  </li>
-			% endif
+				<%block name="navigation_sign_in">
+				% if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
+					% if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
+						<li class="item nav-global-04">
+							<a class="btn-neutral btn-register" style="padding:10px 20px;" href="${reverse('course-specific-register', args=[course.id.to_deprecated_string()])}">${_("회원가입")}</a>
+						</li>
+					% else:
+						<li class="item nav-global-04">
+							<a class="btn-neutral btn-register" style="padding:10px 20px;" href="/register${login_query()}">${_("회원가입")}</a>
+						</li>
+					% endif
+				% endif
+					<li class="item nav-courseware-01">
+						% if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
+							% if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
+								<a class="btn btn-primary" href="${reverse('course-specific-login', args=[course.id.to_deprecated_string()])}${login_query()}">${_("로그인")}</a>
+							% else:
+								<a class="btn btn-primary" href="/login${login_query()}">${_("로그인")}</a>
+							% endif
+						% endif
+					</li>
+				</%block>
+			</ol>
 		% endif
-          <li class="item nav-courseware-01">
-            % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
-              % if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:
-                <a class="btn btn-primary" href="${reverse('course-specific-login', args=[course.id.to_deprecated_string()])}${login_query()}">${_("로그인")}</a>
-              % else:
-                <a class="btn btn-primary" href="/login${login_query()}">${_("Sign in")}</a>
-              % endif
-            % endif
-          </li>										  
-        </%block>
-<!-- Google Translator_api, 로그인, 공지사항
 
-		<div id="google_translate_element"></div><script type="text/javascript">
-                  function googleTranslateElementInit() {new google.translate.TranslateElement({pageLanguage: 'ko', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');}
-                </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>       
--->
-	  </ol>
-    % endif
     % if static.show_language_selector():
      <% languages = static.get_released_languages() %>
       % if len(languages) > 1:

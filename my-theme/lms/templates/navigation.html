@@ -104,6 +104,9 @@ site_status_msg = get_site_status_msg(course_id)
               <a href="${reverse('sysadmin')}">${_("System Admin")}</a>
             </li>
           %endif
+					<li class="item nav-global-01">
+			      <a class="btn-neutral btn-register" style="padding:10px 20px;" href="http://mpp.squarenet.co.kr", target="_blank">공지사항</a> 
+			    </li>
         </%block>
       </ol>
 
@@ -166,9 +169,7 @@ site_status_msg = get_site_status_msg(course_id)
 						</form>
 					</div>
 				% endif
-		    <li class="item nav-global-04">
-			    <a class="btn-neutral btn-register" style="padding:10px 20px;" href="http://mpp.squarenet.co.kr", target="_blank">공지사항</a> 
-			  </li>
+		    
 				<%block name="navigation_sign_in">
 				% if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
 					% if course and settings.FEATURES.get('RESTRICT_ENROLL_BY_REG_METHOD') and course.enrollment_domain:

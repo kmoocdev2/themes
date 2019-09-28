@@ -3,6 +3,7 @@
 <%namespace name='static' file='static_content.html'/>
 <%namespace file='main.html' import="login_query"/>
 <%!
+import logging
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
 
@@ -15,6 +16,8 @@ from branding import api as branding_api
 # app that handles site status messages
 from status.status import get_site_status_msg
 from util.enterprise_helpers import get_enterprise_customer_logo_url
+
+log = logging.getLogger(__name__)
 %>
 
 ## Provide a hook for themes to inject branding on top.
@@ -47,7 +50,7 @@ site_status_msg = get_site_status_msg(course_id)
 </div>
 % endif
 </%block>
-    <div id="cookie-markup" class="cookie-markup"> </div>
+    <div id="cookie-markup" class="cookie-markup"> </div> 
     <header id="global-navigation" class="header-global ${"slim" if course else ""}" >
     <nav class="nav-wrapper wrapper-header" aria-label="${_('Global')}">
     <h1 class="logo">
@@ -60,7 +63,7 @@ site_status_msg = get_site_status_msg(course_id)
             logo_url = branding_api.get_logo_url(is_secure)
             logo_size = ''
         %>
-            <img class="${logo_size}" src="${logo_url}" width="108" height="33" vspace="15" alt="${_("{platform_name} Home Page").format(platform_name=static.get_platform_name())}"/>
+            <img class="${logo_size}" src="${logo_url}" width="156" height="48" vspace="0" style="vertical-align: top;" alt="${_("{platform_name} Home Page").format(platform_name=static.get_platform_name())}"/>
         </%block>
       </a>
     </h1>
@@ -81,6 +84,10 @@ site_status_msg = get_site_status_msg(course_id)
           % if user.is_authenticated():
             <ol class="left nav-global list-inline authenticated">
             <%block name="navigation_global_links_authenticated">
+              ## add Notice Left side
+              <li class="item nav-global-01">
+                <a class="btn-neutral btn-register" style="padding:10px 20px;" href="/notice_list">공지사항</a> 
+              </li>
               % if settings.FEATURES.get('COURSES_ARE_BROWSABLE') and not show_program_listing:
                 <li class="item nav-global-01">
                   <a href="${marketing_link('COURSES')}">${_('Explore courses')}</a>
@@ -119,7 +126,7 @@ site_status_msg = get_site_status_msg(course_id)
             </ol>
           % endif
         % else:
-          <ol class="left list-inline nav-global">
+          <ol class="left list-inline nav-global" style="margin-top: 0px;">
             <%block name="navigation_global_links">
               % if static.get_value('ENABLE_MKTG_SITE', settings.FEATURES.get('ENABLE_MKTG_SITE', False)):
                 <li class="item nav-global-01">
@@ -146,7 +153,7 @@ site_status_msg = get_site_status_msg(course_id)
               % endif
               ## add Notice Left side
               <li class="item nav-global-01">
-                <a class="btn-neutral btn-register" style="padding:10px 20px;" href="http://mpp.squarenet.co.kr", target="_blank">${_("Notice")}</a>
+                <a class="btn-neutral btn-register" style="padding:10px 20px;" href="/notice_list">공지사항</a> 
               </li>
             </%block>
 
@@ -162,7 +169,7 @@ site_status_msg = get_site_status_msg(course_id)
                   </button>
                 </form>
               </div>
-            </li>
+            </li>            
           </ol>
 
           <ol class="right nav-courseware list-inline">
@@ -173,9 +180,30 @@ site_status_msg = get_site_status_msg(course_id)
                     <a class="btn btn-primary" " href="${reverse('course-specific-register', args=[course.id.to_deprecated_string()])}">${_("Register")}</a>
                   </li>
                 % else:
-                  <li class="item nav-global-04">
-                    <a class="btn btn-primary" " href="/register${login_query()}">${_("Register")}</a>
-                  </li>
+                    <%
+                        filterIpList = [
+                            '210.94.', '223.195.', '110.14.', '110.12.', '175.123.',
+                            '61.33.', '1.220.', '1.214.', '14.38.', '59.7.',
+                            '114.71.', '106.250.', '203.247.', '115.89.', '115.92.',
+                            '183.98.'
+                        ]
+                        clientIp = request.META['REMOTE_ADDR']
+                        flag = False
+                        ipSplit = clientIp.split(".")
+                        checkIp = "{0}.{1}.".format(ipSplit[0], ipSplit[1])
+
+                        for filterIp in filterIpList:
+                            if filterIp == checkIp:
+                                flag = True
+                                break
+
+                        log.info("ip check [%s][%s][%s]", flag, clientIp, LANGUAGE_CODE)
+                    %>
+                    % if flag:
+                        <li class="item nav-global-04">
+                            <a class="btn btn-primary" " href="/register${login_query()}">${_("Register")}</a>
+                        </li>
+                    % endif
                 % endif
             % endif
               <li class="item nav-courseware-01">

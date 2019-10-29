@@ -9,76 +9,149 @@ from openedx.core.djangolib.markup import HTML, Text
 %>
 
 <main id="main" aria-label="Content" tabindex="-1">
-  <section class="home">
-    <header>
-      <img src="https://raw.githubusercontent.com/JhPlayGround/mppbuild/master/mppdeu_A.png" style="width: 100%; height: auto;">
-      <!-- springgy title
-      <div class="outer-wrapper" style="display: none;">
-        <div class="title">
-          <div class="heading-group">
-            % if homepage_overlay_html:
-              ${homepage_overlay_html | n, decode.utf8}
-            % else:
-              ## Translators: 'Open edX' is a registered trademark, please keep this untranslated. See http://open.edx.org for more information.
-              <h1>${_("Welcome to Microsoft Learning!")}</h1>
-              ## Translators: 'Open edX' is a registered trademark, please keep this untranslated. See http://open.edx.org for more information.
-              <h2>${_("Learn. Engage. Achieve.")}</h2>
-            % endif
-          </div>
+    <section class="home">
+        <header>
+            <img src="https://raw.githubusercontent.com/JhPlayGround/mppbuild/master/mppdeu_A.png" style="width: 100%; height: auto;">
+            <!-- springgy title
+            <div class="outer-wrapper" style="display: none;">
+              <div class="title">
+                <div class="heading-group">
+                  % if homepage_overlay_html:
+                    ${homepage_overlay_html | n, decode.utf8}
+                  % else:
+                    ## Translators: 'Open edX' is a registered trademark, please keep this untranslated. See http://open.edx.org for more information.
+                    <h1>${_("Welcome to Microsoft Learning!")}</h1>
+                    ## Translators: 'Open edX' is a registered trademark, please keep this untranslated. See http://open.edx.org for more information.
+                    <h2>${_("Learn. Engage. Achieve.")}</h2>
+                  % endif
+                </div>
 
-          % if settings.FEATURES.get('ENABLE_COURSE_DISCOVERY'):
-            <div class="course-search">
-              <form method="get" action="/courses">
-                <label><span class="sr">${_("Search for a course")}</span>
-                  <input class="search-input" name="search_query" type="text" placeholder="${_("Search for a course")}"></input>
-                </label>
-                <button class="search-button" type="submit">
-                  <span class="icon fa fa-search" aria-hidden="true"></span><span class="sr">${_("Search")}</span>
-                </button>
-              </form>
-            </div>
-          % endif
+                % if settings.FEATURES.get('ENABLE_COURSE_DISCOVERY'):
+                  <div class="course-search">
+                    <form method="get" action="/courses">
+                      <label><span class="sr">${_("Search for a course")}</span>
+                        <input class="search-input" name="search_query" type="text" placeholder="${_("Search for a course")}"></input>
+                      </label>
+                      <button class="search-button" type="submit">
+                        <span class="icon fa fa-search" aria-hidden="true"></span><span class="sr">${_("Search")}</span>
+                      </button>
+                    </form>
+                  </div>
+                % endif
 
-        </div>
-          % if show_homepage_promo_video:
-            <a href="#video-modal" class="media" rel="leanModal">
-              <div class="hero">
-                <div class="play-intro"></div>
               </div>
-            </a>
-          % endif
-        </div>
-      </div>
-      --> 
-   
-    </header>
-    <%include file="${courses_list}" />
+                % if show_homepage_promo_video:
+                  <a href="#video-modal" class="media" rel="leanModal">
+                    <div class="hero">
+                      <div class="play-intro"></div>
+                    </div>
+                  </a>
+                % endif
+              </div>
+            </div>
+            -->
 
-  </section>
+        </header>
+
+        % if notice_list:
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.css" rel="stylesheet"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                let notice_slider = $('.bxslider').bxSlider({
+                    auto: true,
+                    speed: 1000,
+                    pause: 3000,
+                    mode: 'vertical', // 'fade', 'horizontal', 'vertical'
+                    autoControls: false,
+                    pager: false,
+                    autoHover: true,
+                    controls: true,
+                    easing: 'ease-in-out',
+                });
+
+                //이전 버튼을 클릭하면 이전 슬라이드로 전환
+                $('.prev-slide').on('click', function () {
+                    notice_slider.goToPrevSlide();  //이전 슬라이드 배너로 이동
+                    return false;              //<a>에 링크 차단
+                });
+
+                //다음 버튼을 클릭하면 다음 슬라이드로 전환
+                $('.next-slide').on('click', function () {
+                    notice_slider.goToNextSlide();  //다음 슬라이드 배너로 이동
+                    return false;
+                });
+
+
+            });
+        </script>
+        <style>
+            .notice_list {
+                background-color: white;
+            }
+
+            .notice_list_inner {
+                max-width: 1200px;
+                margin-left: auto;
+                margin-right: auto;
+
+            }
+
+            .notice_list li {
+                padding: 20px 60px;
+                font-size: 25px;
+                font-weight: 400;
+            }
+
+            .bx-wrapper{
+                margin-bottom: 0px;
+                box-shadow: 0 0;
+            }
+
+        </style>
+
+        <div class="notice_list">
+            <div class="notice_list_inner">
+                <ul class="bxslider">
+                    % for notice in notice_list:
+                    <li>${notice.title}</li>
+                    % endfor
+                </ul>
+            </div>
+        </div>
+
+        % endif
+
+        <%include file="${courses_list}" />
+
+    </section>
 </main>
 
 % if show_homepage_promo_video:
-  <section id="video-modal" class="modal home-page-video-modal video-modal">
+<section id="video-modal" class="modal home-page-video-modal video-modal">
     <div class="inner-wrapper">
-      <iframe title="YouTube Video" width="640" height="360" src="//www.youtube.com/embed/${homepage_promo_video_youtube_id}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <iframe title="YouTube Video" width="640" height="360" src="//www.youtube.com/embed/${homepage_promo_video_youtube_id}?showinfo=0" frameborder="0" allowfullscreen></iframe>
     </div>
-  </section>
+</section>
 % endif
 
 <%block name="js_extra">
-   <script type="text/javascript">
-      $(window).load(function() {
-         if(getParameterByName('next')) {
-              $('#login').trigger("click");
-         }
-      })
-   </script>
+<script type="text/javascript">
+    $(window).load(function () {
+        if (getParameterByName('next')) {
+            $('#login').trigger("click");
+        }
+    })
+</script>
 </%block>
 
 % if show_signup_immediately is not UNDEFINED:
-  ## NOTE: This won't work in production, because anonymous views are cached, so it will
-  ## show either with or without this extra js for 3 minutes at a time.
+## NOTE: This won't work in production, because anonymous views are cached, so it will
+## show either with or without this extra js for 3 minutes at a time.
 <script type="text/javascript">
-  $(window).load(function() {$('#signup_action').trigger("click");});
+    $(window).load(function () {
+        $('#signup_action').trigger("click");
+    });
 </script>
 % endif

@@ -53,7 +53,7 @@ site_status_msg = get_site_status_msg(course_id)
     <div id="cookie-markup" class="cookie-markup"> </div> 
     <header id="global-navigation" class="header-global ${"slim" if course else ""}" >
     <nav class="nav-wrapper wrapper-header" aria-label="${_('Global')}">
-    <h1 class="logo">
+    <h1 class="logo" data-org="kotech">
       <a href="${marketing_link('ROOT')}">
         <%block name="navigation_logo">
         <%
@@ -146,9 +146,11 @@ site_status_msg = get_site_status_msg(course_id)
             <%block name="navigation_other_global_links">
               % if not settings.FEATURES['DISABLE_LOGIN_BUTTON']:
                 % if settings.FEATURES.get('ENABLE_COURSE_DISCOVERY') or course:
-                  <li class="item nav-global-05">
+                  <!--
+                  <li class="item nav-global-05" data-case="1">
                     <a class="btn" href="/courses">${_("Explore Courses")}</a>
-              </li>
+                  </li>
+                  -->
                 % endif
               % endif
               ## add Notice Left side
@@ -185,7 +187,7 @@ site_status_msg = get_site_status_msg(course_id)
                             '210.94.', '223.195.', '110.14.', '110.12.', '175.123.',
                             '61.33.', '1.220.', '1.214.', '14.38.', '59.7.',
                             '114.71.', '106.250.', '203.247.', '115.89.', '115.92.',
-                            '183.98.'
+                            '183.98.', '182.237'
                         ]
                         clientIp = request.META['REMOTE_ADDR']
                         flag = False
@@ -198,6 +200,9 @@ site_status_msg = get_site_status_msg(course_id)
                                 break
 
                         log.info("ip check [%s][%s][%s]", flag, clientIp, LANGUAGE_CODE)
+
+                        # test
+                        flag = True
                     %>
                     % if flag:
                         <li class="item nav-global-04">

@@ -1,0 +1,44 @@
+<%page expression_filter="h"/>
+<%inherit file="main.html" />
+<%namespace name='static' file='static_content.html'/>
+<%!
+from django.utils.translation import ugettext as _
+from django.core.urlresolvers import reverse
+
+from openedx.core.djangolib.markup import HTML, Text
+%>
+
+<style>
+    .org_logo {
+
+    }
+
+    .org_body {
+        background-color: white;
+        padding: 20px 0;
+    }
+
+    .org_body > .content {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<main id="main" aria-label="Content" tabindex="-1">
+    <section class="home">
+        <header>
+            <img class="org_logo" src="/media/${org.org_image}" style="width: 100%; height: auto;">
+        </header>
+
+        <section class="org_body">
+            <div class="content">
+                ${org.org_body | n, static.newline_to_br}
+            </div>
+        </section>
+
+        <%include file="${courses_list}" />
+
+    </section>
+</main>
+

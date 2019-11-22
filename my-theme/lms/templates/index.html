@@ -56,9 +56,24 @@ from openedx.core.djangolib.markup import HTML, Text
         % if notice_list:
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.css" rel="stylesheet"/>
+        <link href="/static/my-theme/css/lms-custom.css" rel="stylesheet"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
+
+                // 분류 div mouseenter 이벤트
+                $(".section_list_inner>div").each(function () {
+                    $(this).mouseenter(function () {
+                        let hover_src = $(this).find("img").data("hover");
+                        $(this).find("img").prop("src", hover_src);
+                    });
+
+                    $(this).mouseleave(function () {
+                        let base_src = $(this).find("img").data("base");
+                        $(this).find("img").prop("src", base_src);
+                    });
+                });
+
                 let notice_slider = $('.bxslider').bxSlider({
                     auto: true,
                     speed: 1000,
@@ -69,6 +84,7 @@ from openedx.core.djangolib.markup import HTML, Text
                     autoHover: true,
                     controls: true,
                     easing: 'ease-in-out',
+                    touchEnabled: false,
                 });
 
                 //이전 버튼을 클릭하면 이전 슬라이드로 전환
@@ -85,37 +101,47 @@ from openedx.core.djangolib.markup import HTML, Text
 
 
             });
+
+            function move_to_section(section_id) {
+                var offset = $("#" + section_id).offset();
+
+                if (offset) {
+                    $("html, body").stop().animate({scrollTop: offset.top - 5}, 500, 'easeInOutExpo');
+                }
+
+            }
+
         </script>
-        <style>
-            .notice_list {
-                background-color: white;
-            }
 
-            .notice_list_inner {
-                max-width: 1200px;
-                margin-left: auto;
-                margin-right: auto;
-
-            }
-
-            .notice_list li {
-                padding: 20px 60px;
-                font-size: 25px;
-                font-weight: 400;
-            }
-
-            .bx-wrapper{
-                margin-bottom: 0px;
-                box-shadow: 0 0;
-            }
-
-        </style>
+        <div class="section_list">
+            <div class="section_list_inner">
+                % for section in sections:
+                <div>
+                    <a href="javascript:move_to_section('section_${section.id}')">
+                        <div class="section_image">
+                            <img
+                                    src="${section.section_logo_large.url}"
+                                    data-base="${section.section_logo_large.url}"
+                                    data-hover="${section.section_logo_large_hover.url}"
+                                    onerror="this.src='/static/my-theme/images/no_image.png'"
+                            />
+                        </div>
+                        <div class="section_text">
+                            ${section}
+                        </div>
+                    </a>
+                </div>
+                % endfor
+            </div>
+        </div>
 
         <div class="notice_list">
             <div class="notice_list_inner">
                 <ul class="bxslider">
                     % for notice in notice_list:
-                    <li>${notice.title}</li>
+                    <li>
+                        <a href="/notice_detail?noticeId=${notice.id}">${notice.title}</a>
+                    </li>
                     % endfor
                 </ul>
             </div>

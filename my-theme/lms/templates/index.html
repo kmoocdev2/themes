@@ -139,7 +139,7 @@ from openedx.core.djangolib.markup import HTML, Text
             <div class="notice_list_inner">
                 <ul class="bxslider">
                     % for notice in notice_list:
-                    <li>
+                    <li style="display: none;">
                         <a href="/notice_detail?noticeId=${notice.id}">${notice.title}</a>
                     </li>
                     % endfor

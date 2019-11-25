@@ -61,6 +61,8 @@ from openedx.core.djangolib.markup import HTML, Text
         <script type="text/javascript">
             $(document).ready(function () {
 
+                $(".notice_list li").fadeIn("fast");
+
                 // 분류 div mouseenter 이벤트
                 $(".section_list_inner>div").each(function () {
                     $(this).mouseenter(function () {

@@ -53,10 +53,11 @@ from openedx.core.djangolib.markup import HTML, Text
 
         </header>
 
+        <link href="/static/my-theme/css/lms-custom.css" rel="stylesheet"/>
+
         % if notice_list:
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.css" rel="stylesheet"/>
-        <link href="/static/my-theme/css/lms-custom.css" rel="stylesheet"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {

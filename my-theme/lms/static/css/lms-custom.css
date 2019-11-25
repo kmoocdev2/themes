@@ -1,53 +1,49 @@
 @font-face {
-  font-family:'Noto Sans'; /* Bold */
-  /* src: url('/font/NotoSans-Bold.eot'); */
-  src:local(※),
-      /* url('/font/NotoSans-Bold.eot#iefix') format('embedded-opentype'), */
-      url('../fonts/NotoSans-Bold.woff') format('woff'),
-      url('../fonts/NotoSans-Bold.woff2') format('woff2'),
-      url('../fonts/NotoSans-Bold.otf') format('opentype');
-  font-weight:700;
-  font-style:normal;
+    font-family: 'Noto Sans'; /* Bold */
+    /* src: url('/font/NotoSans-Bold.eot'); */
+    src: local(※),
+        /* url('/font/NotoSans-Bold.eot#iefix') format('embedded-opentype'), */ url('../fonts/NotoSans-Bold.woff') format('woff'),
+    url('../fonts/NotoSans-Bold.woff2') format('woff2'),
+    url('../fonts/NotoSans-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
 }
 
 @font-face {
-  font-family:'Noto Sans'; /* Medium */
-  /* src: url('/font/NotoSans-Medium.eot'); */
-  src:local(※),
-      /* url('/font/NotoSans-Medium.eot#iefix') format('embedded-opentype'), */
-      url('../fonts/NotoSans-Medium.woff') format('woff'),
-      url('../fonts/NotoSans-Medium.woff2') format('woff2'),
-      url('../fonts/NotoSans-Medium.otf') format('opentype');
-  font-weight:500;
-  font-style:normal;
+    font-family: 'Noto Sans'; /* Medium */
+    /* src: url('/font/NotoSans-Medium.eot'); */
+    src: local(※),
+        /* url('/font/NotoSans-Medium.eot#iefix') format('embedded-opentype'), */ url('../fonts/NotoSans-Medium.woff') format('woff'),
+    url('../fonts/NotoSans-Medium.woff2') format('woff2'),
+    url('../fonts/NotoSans-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
 }
 
 @font-face {
-  font-family:'Noto Sans'; /* Regular */
-  /* src: url('/font/NotoSans-Regular.eot'); */
-  src:local(※),
-      /* url('/font/NotoSans-Regular.eot#iefix') format('embedded-opentype'), */
-      url('../fonts/NotoSans-Regular.woff') format('woff'),
-      url('../fonts/NotoSans-Regular.woff2') format('woff2'),
-      url('../fonts/NotoSans-Regular.otf') format('opentype');
-  font-weight:400;
-  font-style:normal;
+    font-family: 'Noto Sans'; /* Regular */
+    /* src: url('/font/NotoSans-Regular.eot'); */
+    src: local(※),
+        /* url('/font/NotoSans-Regular.eot#iefix') format('embedded-opentype'), */ url('../fonts/NotoSans-Regular.woff') format('woff'),
+    url('../fonts/NotoSans-Regular.woff2') format('woff2'),
+    url('../fonts/NotoSans-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
 }
 
 
 html, body {
-     font-family:'Noto Sans'!important;
+    font-family: 'Noto Sans' !important;
     font-size: 1em;
     font-style: normal;
     line-height: 1em;
 }
 
 
-
-
 .notice_list {
     background-color: white;
-    min-height: 20px;font-family:'Noto Sans' !important;
+    min-height: 20px;
+    font-family: 'Noto Sans' !important;
 }
 
 .notice_list_inner {
@@ -60,7 +56,11 @@ html, body {
 .notice_list li {
     padding: 20px 60px;
     font-size: 25px;
-    font-weight: 400;font-family:'Noto Sans'!important;
+    font-weight: 400;
+    font-family: 'Noto Sans' !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bx-wrapper {
@@ -70,13 +70,16 @@ html, body {
 
 .page-header > h2 {
     background-color: #e7e7e7;
-    border-radius: 5px;font-family:'Noto Sans'!important;font-weight:500;
-    padding: 5px 20px; color:#0072c6;
+    border-radius: 5px;
+    font-family: 'Noto Sans' !important;
+    font-weight: 500;
+    padding: 5px 20px;
+    color: #0072c6;
 }
 
-.courses-container .courses .course .course-info h2, .courses-container .courses .course .course-info .home>header .title>.heading-group p, .home>header .title>.heading-group .courses-container .courses .course .course-info p, .courses-container .courses .course .course-info section.outside-app h1, section.outside-app .courses-container .courses .course .course-info h1 {
+.courses-container .courses .course .course-info h2, .courses-container .courses .course .course-info .home > header .title > .heading-group p, .home > header .title > .heading-group .courses-container .courses .course .course-info p, .courses-container .courses .course .course-info section.outside-app h1, section.outside-app .courses-container .courses .course .course-info h1 {
 
-font-family:'Noto Sans'!important;
+    font-family: 'Noto Sans' !important;
 }
 
 
@@ -123,7 +126,8 @@ font-family:'Noto Sans'!important;
 */
 
 .page-header img {
-    max-height: 21px;    vertical-align: bottom;
+    max-height: 21px;
+    vertical-align: bottom;
 }
 
 .section_image {
@@ -178,12 +182,33 @@ a, a:visited {
     font: inherit;
     text-decoration: none;
     transition: all 0.1s linear 0s;
+    white-space: nowrap;
 }
 
 a:hover, a:focus {
-    color: #0079BC;
+    color: #003655;
 }
 
 .highlighted-courses .courses, .find-courses .courses {
     padding: 10px 0 15px;
 }
+
+.org_body, .courses-container {
+    font-family: 'Noto Sans' !important;
+}
+
+.org_logo {
+
+}
+
+.org_body {
+    background-color: white;
+    padding: 20px 0;
+}
+
+.org_body > .content {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+

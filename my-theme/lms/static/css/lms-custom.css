@@ -182,7 +182,6 @@ a, a:visited {
     font: inherit;
     text-decoration: none;
     transition: all 0.1s linear 0s;
-    white-space: nowrap;
 }
 
 a:hover, a:focus {

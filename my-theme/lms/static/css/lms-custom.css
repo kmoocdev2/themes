@@ -185,7 +185,7 @@ a, a:visited {
 }
 
 a:hover, a:focus {
-    color: #003655;
+    color: #003655 !important;
 }
 
 .highlighted-courses .courses, .find-courses .courses {

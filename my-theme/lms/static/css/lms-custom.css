@@ -55,13 +55,19 @@ html, body {
 
 .notice_list li {
     padding: 20px 60px;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 400;
     font-family: 'Noto Sans' !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    height: 20px;
+
 }
+
+.notice_list li a {
+}
+
 
 .bx-wrapper {
     margin-bottom: 0px !important;
@@ -76,6 +82,7 @@ html, body {
     padding: 5px 20px;
     color: #0072c6;
 }
+
 
 .courses-container .courses .course .course-info h2, .courses-container .courses .course .course-info .home > header .title > .heading-group p, .home > header .title > .heading-group .courses-container .courses .course .course-info p, .courses-container .courses .course .course-info section.outside-app h1, section.outside-app .courses-container .courses .course .course-info h1 {
 

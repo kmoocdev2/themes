@@ -11,7 +11,8 @@ from openedx.core.djangolib.markup import HTML, Text
 <main id="main" aria-label="Content" tabindex="-1">
     <section class="home">
         <header>
-            <img src="https://raw.githubusercontent.com/JhPlayGround/mppbuild/master/mppdeu_A.png" style="width: 100%; height: auto;">
+            <!-- <img src="https://raw.githubusercontent.com/JhPlayGround/mppbuild/master/mppdeu_A.png" style="width: 100%; height: auto;"> -->
+            <img src="/static/my-theme/images/main.png" style="width: 100%; height: auto;">
             <!-- springgy title
             <div class="outer-wrapper" style="display: none;">
               <div class="title">
@@ -20,7 +21,7 @@ from openedx.core.djangolib.markup import HTML, Text
                     ${homepage_overlay_html | n, decode.utf8}
                   % else:
                     ## Translators: 'Open edX' is a registered trademark, please keep this untranslated. See http://open.edx.org for more information.
-                    <h1>${_("Welcome to Microsoft Learning!")}</h1>
+                    <h1>${_("Welcome to  Microsoft Learning!")}</h1>
                     ## Translators: 'Open edX' is a registered trademark, please keep this untranslated. See http://open.edx.org for more information.
                     <h2>${_("Learn. Engage. Achieve.")}</h2>
                   % endif

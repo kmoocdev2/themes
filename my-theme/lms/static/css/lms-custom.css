@@ -221,3 +221,6 @@ a:hover, a:focus {
     margin-right: auto;
 }
 
+.home .highlighted-courses {
+    margin-bottom: 0px;
+}

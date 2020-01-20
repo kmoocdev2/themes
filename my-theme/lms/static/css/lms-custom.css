@@ -224,3 +224,7 @@ a:hover, a:focus {
 .home .highlighted-courses {
     margin-bottom: 0px;
 }
+
+.bx-wrapper .bx-controls-direction a {
+    margin-top: -18px !important;
+}

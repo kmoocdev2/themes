@@ -97,11 +97,7 @@ a:hover, a:focus, a:visited:hover, a:visited:focus {
                 <td class="field-id" align="center">${notice.id}</td>
                 <td class="field-title">
                     <a href="notice_detail?noticeId=${notice.id}&page=${page}&searchData=${searchData}">
-                    % if len(notice.title) > 50:
-                        ${"{0}...".format(notice.title[:50])}
-                    % else:
                         ${notice.title}
-                    % endif 
                     </a>
                 </td>
                 <td class="field-created_date nowrap" align="center">${notice.created_date.strftime("%Y-%m-%d")}</td>
